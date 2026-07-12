@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Classless</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="manifest" href="manifest.json" />
+  <meta name="theme-color" content="#8aa375" />
+  <link rel="icon" href="icon-192.png" />
+  <link rel="apple-touch-icon" href="icon-192.png" />
+  <meta name="mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <meta name="apple-mobile-web-app-title" content="Classless" />
+</head>
+<body>
+  <main class="app-shell">
+    <header class="app-header">
+      <div class="brand">
+        <div class="brand-mark">C</div>
+        <strong>Classless</strong>
+      </div>
+      <span class="save-indicator" id="saveIndicator"></span>
+    </header>
+
+    <section class="top-panel">
+      <div class="player-card" id="playerCard" role="button" tabindex="0" aria-label="Toggle roster">
+        <div class="player-meta">
+          <span class="label">Player</span>
+          <strong id="displayName">—</strong>
+          <span class="label">Race</span>
+          <strong id="displayRace">—</strong>
+        </div>
+        <div class="player-stats">
+          <div>
+            <span>HP</span>
+            <strong id="topHp">—</strong>/<strong id="topMaxHp">—</strong>
+          </div>
+          <div>
+            <span>XP</span>
+            <strong id="topXp">—</strong>
+          </div>
+          <div>
+            <span>MP</span>
+            <strong id="topMp">—</strong>/<strong id="topMaxMp">—</strong>
+          </div>
+        </div>
+        <div class="stat-controls">
+          <div class="stat-control">
+            <span>HP</span>
+            <div class="control-buttons">
+              <button type="button" data-action="hpDown">-</button>
+              <button type="button" data-action="hpUp">+</button>
+              <button type="button" data-action="hpReset">⟳</button>
+            </div>
+          </div>
+          <div class="stat-control">
+            <span>XP</span>
+            <div class="control-buttons">
+              <button type="button" data-action="xpDown">-</button>
+              <button type="button" data-action="xpUp">+</button>
+            </div>
+          </div>
+          <div class="stat-control">
+            <span>MP</span>
+            <div class="control-buttons">
+              <button type="button" data-action="mpDown">-</button>
+              <button type="button" data-action="mpUp">+</button>
+              <button type="button" data-action="mpReset">⟳</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="roster-card hidden" id="rosterCard">
+        <div class="roster-header">
+          <strong>Roster</strong>
+          <span id="characterCount">0</span>
+        </div>
+        <ul id="characterList" class="character-list"></ul>
+        <form id="characterForm" class="minimal-form">
+          <input id="characterName" placeholder="Name" autocomplete="off" maxlength="40" required />
+          <input id="characterRace" placeholder="Race" autocomplete="off" maxlength="40" required />
+          <button class="button button-primary" type="submit">Add</button>
+        </form>
+      </div>
+    </section>
+
+    <section class="traits-panel" id="traitCards"></section>
+  </main>
+
+  <script src="script.js"></script>
+  <script>
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', () => {
+        navigator.serviceWorker.register('sw.js').catch((error) => {
+          console.error('Service worker registration failed:', error);
+        });
+      });
+    }
+  </script>
+</body>
+</html>
